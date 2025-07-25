@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Human Health Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4338ca;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Human Health Portal</h1>
+    <p style="text-align:center">Learn about healthy living, nutrition, exercise, and track your BMI.</p>
+
+    <div class="card">
+      <h2>BMI Calculator</h2>
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" placeholder="Enter your weight in kg" />
+
+      <label for="height">Height (cm)</label>
+      <input type="number" id="height" placeholder="Enter your height in cm" />
+
+      <button onclick="calculateBMI()">Calculate BMI</button>
+
+      <div class="result" id="bmiResult"></div>
+    </div>
+
+    <div class="card">
+      <h2>Healthy Living Tips</h2>
+      <ul>
+        <li>Eat a balanced diet rich in fruits and vegetables.</li>
+        <li>Engage in regular physical activity.</li>
+        <li>Stay hydrated and get enough sleep.</li>
+        <li>Avoid smoking and excessive alcohol consumption.</li>
+        <li>Manage stress through mindfulness or hobbies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+
+      if (weight > 0 && height > 0) {
+        const bmi = (weight / ((height / 100) ** 2)).toFixed(2);
+        let category = '';
+
+        if (bmi < 18.5) category = 'Underweight';
+        else if (bmi < 24.9) category = 'Normal weight';
+        else if (bmi < 29.9) category = 'Overweight';
+        else category = 'Obese';
+
+        document.getElementById('bmiResult').innerHTML = `
+          <p>Your BMI: <strong>${bmi}</strong></p>
+          <p>Category: <strong>${category}</strong></p>
+        `;
+      } else {
+        document.getElementById('bmiResult').innerHTML = '<p>Please enter valid weight and height.</p>';
+      }
+    }
+  </script>
+</body>
+</html>
